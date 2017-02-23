@@ -2,6 +2,6 @@ package magelle.kebab;
 
 public enum FoodType {
 
-    MEAT, FISH, OTHER
+    MEAT, FISH, CHEESE, OTHER
 
 }

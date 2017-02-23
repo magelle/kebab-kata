@@ -42,4 +42,29 @@ public class KebabTest {
         verify(diet, times(1)).accept(foods);
     }
 
+    @Test
+    public void doubleCheese_should_add_the_same_cheese() {
+        Kebab kebab = new Kebab(LETTUCE, PARMESAN).doubleCheese();
+        assertThat(kebab.getIngredients()).containsExactly(LETTUCE, PARMESAN, PARMESAN);
+    }
+
+    @Test
+    public void doubleCheese_do_nothing_when_no_cheese() {
+        Kebab kebab = new Kebab(LETTUCE, TOMATO).doubleCheese();
+        assertThat(kebab.getIngredients()).containsExactly(LETTUCE, TOMATO);
+    }
+
+    @Test
+    public void without_should_remove_ingredients() {
+        Kebab kebab = new Kebab(Ingredient.LAMB, Ingredient.ONION).without(LAMB);
+        assertThat(kebab.getIngredients())
+                .containsExactly(Ingredient.ONION);
+    }
+
+    @Test
+    public void without_should_remove_ingredients_but_this_ingredient_is_not_present() {
+        Kebab kebab = new Kebab(Ingredient.ONION).without(LAMB);
+        assertThat(kebab.getIngredients())
+                .containsExactly(Ingredient.ONION);
+    }
 }
