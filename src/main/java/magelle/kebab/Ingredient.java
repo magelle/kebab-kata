@@ -1,5 +1,5 @@
 package magelle.kebab;
 
 public enum Ingredient {
-    Tomato, cheddar, Lamb, Lettuce
+    TOMATO, CHEDDAR, LAMB, LETTUCE, BEEF
 }
