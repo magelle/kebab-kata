@@ -2,10 +2,12 @@ package magelle.kebab;
 
 import org.junit.Test;
 
-import static magelle.kebab.Ingredient.LAMB;
-import static magelle.kebab.Ingredient.LETTUCE;
-import static magelle.kebab.Ingredient.CHEDDAR;
+import java.util.List;
+
+import static java.util.Arrays.asList;
+import static magelle.kebab.Ingredient.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.*;
 
 public class KebabTest {
 
@@ -31,15 +33,13 @@ public class KebabTest {
     }
 
     @Test
-    public void isVegetarian_should_return_true_when_kebab_contains_meet() {
-        Kebab kebab = new Kebab(CHEDDAR, LETTUCE);
-        assertThat(kebab.isVegetarian()).isTrue();
-    }
-
-    @Test
-    public void isVegetarian_should_return_false_when_kebab_does_not_contains_meet() {
-        Kebab kebab = new Kebab(CHEDDAR, LAMB);
-        assertThat(kebab.isVegetarian()).isFalse();
+    public void validate_should_return_diet_accept_result() {
+        Diet diet = mock(Diet.class);
+        List<Food> foods = asList(CHEDDAR, TUNA);
+        when(diet.accept(foods)).thenReturn(true);
+        Kebab kebab = new Kebab(CHEDDAR, TUNA);
+        assertThat(kebab.validate(diet)).isTrue();
+        verify(diet, times(1)).accept(foods);
     }
 
 }

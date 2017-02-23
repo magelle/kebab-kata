@@ -6,18 +6,17 @@ import java.util.List;
 import static java.util.Arrays.asList;
 
 public class Kebab {
-    private final List<Ingredient> ingredients;
-    private final VegetarianDiet vegetarianDiet = new VegetarianDiet();
+    private final List<Food> ingredients;
 
-    public Kebab(Ingredient ... ingredients) {
+    public Kebab(Food ... ingredients) {
         this.ingredients = new ArrayList<>(asList(ingredients));
     }
 
-    public List<Ingredient> getIngredients() {
+    public List<Food> getIngredients() {
         return new ArrayList<>(ingredients);
     }
 
-    public boolean isVegetarian() {
-        return vegetarianDiet.isVegetarian(this.ingredients);
+    public boolean validate(Diet diet) {
+        return diet.accept(this.ingredients);
     }
 }
